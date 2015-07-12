@@ -115,8 +115,11 @@ public class MainActivity extends ActionBarActivity {
                     for (int i = 0; i < mPlayers.size(); i++) {
                         if (mPlayers.get(i).getImageView() == v) {
                             mPlayers.get(i).toggleFamily();
+                            break;
                         }
                     }
+
+                    calcConflict();
                 }
             });
         }
