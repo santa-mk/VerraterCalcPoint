@@ -4,6 +4,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -15,7 +17,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setPlayerColor();
+        initialize();
     }
 
     @Override
@@ -40,6 +42,17 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void initialize() {
+        setPlayerColor();
+
+        findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetPoints();
+            }
+        });
+    }
+
     private void setPlayerColor() {
         LinearLayout player = (LinearLayout)findViewById(R.id.player2);
         ImageView image = (ImageView)player.findViewById(R.id.family);
@@ -56,5 +69,19 @@ public class MainActivity extends ActionBarActivity {
         player = (LinearLayout)findViewById(R.id.player5);
         image = (ImageView)player.findViewById(R.id.family);
         image.setBackgroundColor(getResources().getColor(R.color.brown));
+    }
+
+    private void resetPoints() {
+        int playerIds[] = {R.id.player1,
+                R.id.player2,
+                R.id.player3,
+                R.id.player4,
+                R.id.player5};
+
+        for (int i = 0; i < playerIds.length; i++) {
+            LinearLayout player = (LinearLayout)findViewById(playerIds[i]);
+            EditText conflict = (EditText)player.findViewById(R.id.player_conflict);
+            conflict.setText("0");
+        }
     }
 }
