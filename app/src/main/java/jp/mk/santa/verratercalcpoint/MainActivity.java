@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -54,7 +57,8 @@ public class MainActivity extends ActionBarActivity {
     private void initialize() {
         createPlayers();
         setPlayerColor();
-        setPlayerFamilyListener();
+        setChangePlayerFamilyListener();
+        setSpinnerChangeListener();
 
         findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +102,7 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    private void setPlayerFamilyListener() {
+    private void setChangePlayerFamilyListener() {
         for (int i = 0; i < mPlayerIds.length; i++) {
             LinearLayout player = (LinearLayout)findViewById(mPlayerIds[i]);
             ImageView image = (ImageView)player.findViewById(R.id.family);
@@ -113,5 +117,50 @@ public class MainActivity extends ActionBarActivity {
                 }
             });
         }
+    }
+
+    private void setSpinnerChangeListener() {
+        Spinner s = (Spinner)findViewById(R.id.eagle_base);
+        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                calcConflict();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        s = (Spinner)findViewById(R.id.rose_base);
+        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                calcConflict();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void calcConflict() {
+        int eagleSum = Integer.parseInt(((Spinner) findViewById(R.id.eagle_base)).getSelectedItem().toString());
+        int roseSum = Integer.parseInt(((Spinner)findViewById(R.id.rose_base)).getSelectedItem().toString());
+
+        for (int i = 0; i < mPlayers.size(); i++) {
+            Player p = mPlayers.get(i);
+            if (p.getFamily() == Family.Eagle) {
+                eagleSum += p.getConflict();
+            } else {
+                roseSum += p.getConflict();
+            }
+        }
+
+        ((TextView)findViewById(R.id.eagle_point)).setText(String.valueOf(eagleSum));
+        ((TextView)findViewById(R.id.rose_point)).setText(String.valueOf(roseSum));
     }
 }
