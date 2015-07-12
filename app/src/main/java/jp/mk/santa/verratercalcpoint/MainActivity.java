@@ -4,6 +4,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -12,6 +14,8 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setPlayerColor();
     }
 
     @Override
@@ -34,5 +38,23 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setPlayerColor() {
+        LinearLayout player = (LinearLayout)findViewById(R.id.player2);
+        ImageView image = (ImageView)player.findViewById(R.id.family);
+        image.setBackgroundColor(getResources().getColor(R.color.blue));
+
+        player = (LinearLayout)findViewById(R.id.player3);
+        image = (ImageView)player.findViewById(R.id.family);
+        image.setBackgroundColor(getResources().getColor(R.color.white));
+
+        player = (LinearLayout)findViewById(R.id.player4);
+        image = (ImageView)player.findViewById(R.id.family);
+        image.setBackgroundColor(getResources().getColor(R.color.orange));
+
+        player = (LinearLayout)findViewById(R.id.player5);
+        image = (ImageView)player.findViewById(R.id.family);
+        image.setBackgroundColor(getResources().getColor(R.color.brown));
     }
 }
