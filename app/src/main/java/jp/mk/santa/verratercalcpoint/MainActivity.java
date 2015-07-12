@@ -11,6 +11,11 @@ import android.widget.LinearLayout;
 
 
 public class MainActivity extends ActionBarActivity {
+    final private int mPlayerIds[] = {R.id.player1,
+            R.id.player2,
+            R.id.player3,
+            R.id.player4,
+            R.id.player5};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +77,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void resetPoints() {
-        int playerIds[] = {R.id.player1,
-                R.id.player2,
-                R.id.player3,
-                R.id.player4,
-                R.id.player5};
-
-        for (int i = 0; i < playerIds.length; i++) {
-            LinearLayout player = (LinearLayout)findViewById(playerIds[i]);
+        for (int i = 0; i < mPlayerIds.length; i++) {
+            LinearLayout player = (LinearLayout)findViewById(mPlayerIds[i]);
             EditText conflict = (EditText)player.findViewById(R.id.player_conflict);
             conflict.setText("0");
         }
