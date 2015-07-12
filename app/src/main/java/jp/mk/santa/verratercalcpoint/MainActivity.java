@@ -9,8 +9,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends ActionBarActivity {
+    private ArrayList<Player> mPlayers = new ArrayList<Player>();
+
     final private int mPlayerIds[] = {R.id.player1,
             R.id.player2,
             R.id.player3,
@@ -48,7 +52,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void initialize() {
+        createPlayers();
         setPlayerColor();
+        setPlayerFamilyListener();
 
         findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +62,14 @@ public class MainActivity extends ActionBarActivity {
                 resetPoints();
             }
         });
+    }
+
+    private void createPlayers() {
+        mPlayers.add(new Player(Family.Eagle, (ImageView)findViewById(R.id.player1).findViewById(R.id.family)));
+        mPlayers.add(new Player(Family.Eagle, (ImageView)findViewById(R.id.player2).findViewById(R.id.family)));
+        mPlayers.add(new Player(Family.Eagle, (ImageView)findViewById(R.id.player3).findViewById(R.id.family)));
+        mPlayers.add(new Player(Family.Eagle, (ImageView)findViewById(R.id.player4).findViewById(R.id.family)));
+        mPlayers.add(new Player(Family.Eagle, (ImageView)findViewById(R.id.player5).findViewById(R.id.family)));
     }
 
     private void setPlayerColor() {
@@ -81,6 +95,23 @@ public class MainActivity extends ActionBarActivity {
             LinearLayout player = (LinearLayout)findViewById(mPlayerIds[i]);
             EditText conflict = (EditText)player.findViewById(R.id.player_conflict);
             conflict.setText("0");
+        }
+    }
+
+    private void setPlayerFamilyListener() {
+        for (int i = 0; i < mPlayerIds.length; i++) {
+            LinearLayout player = (LinearLayout)findViewById(mPlayerIds[i]);
+            ImageView image = (ImageView)player.findViewById(R.id.family);
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    for (int i = 0; i < mPlayers.size(); i++) {
+                        if (mPlayers.get(i).getImageView() == v) {
+                            mPlayers.get(i).toggleFamily();
+                        }
+                    }
+                }
+            });
         }
     }
 }
