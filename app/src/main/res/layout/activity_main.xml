@@ -14,6 +14,12 @@
             android:layout_height="wrap_content"
             android:id="@+id/families">
 
+            <ImageView
+                android:layout_width="@dimen/family_icon_size"
+                android:layout_height="@dimen/family_icon_size"
+                android:id="@+id/eagle_family"
+                android:src="@drawable/eagle" />
+
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,7 +34,9 @@
                 android:text="0"
                 android:id="@+id/eagle_point"
                 android:layout_weight="1"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="@dimen/conflict_sum_size"
+                android:textColor="@color/red" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,7 +45,9 @@
                 android:text="0"
                 android:id="@+id/rose_point"
                 android:layout_weight="1"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="@dimen/conflict_sum_size"
+                android:textColor="@color/red" />
 
             <Spinner
                 android:layout_width="wrap_content"
@@ -45,6 +55,12 @@
                 android:id="@+id/rose_base"
                 android:entries="@array/land"
                 android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="@dimen/family_icon_size"
+                android:layout_height="@dimen/family_icon_size"
+                android:id="@+id/rose_family"
+                android:src="@drawable/rose" />
 
         </LinearLayout>
 
@@ -78,4 +94,12 @@
             android:id="@+id/player5"
             layout="@layout/player"
             android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset"
+            android:id="@+id/reset"
+            android:layout_gravity="center" />
+
     </LinearLayout>
