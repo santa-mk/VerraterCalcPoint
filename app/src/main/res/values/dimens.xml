@@ -2,4 +2,9 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="family_icon_size">60dp</dimen>
+    <dimen name="player_color_padding">5dp</dimen>
+    <dimen name="player_padding">2dp</dimen>
+    <dimen name="player_conflict_width">50dp</dimen>
+    <dimen name="conflict_sum_size">30sp</dimen>
 </resources>
