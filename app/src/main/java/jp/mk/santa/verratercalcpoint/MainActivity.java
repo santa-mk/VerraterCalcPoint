@@ -2,6 +2,8 @@ package jp.mk.santa.verratercalcpoint;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,6 +61,7 @@ public class MainActivity extends ActionBarActivity {
         setPlayerColor();
         setChangePlayerFamilyListener();
         setSpinnerChangeListener();
+        setEditTextListeners();
 
         findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +146,45 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+    }
+
+    private void setEditTextListeners() {
+        for (int i = 0; i < mPlayerIds.length; i++) {
+            setEditTextListener((EditText) findViewById(mPlayerIds[i]).findViewById(R.id.player_conflict), i);
+        }
+    }
+
+    private void setEditTextListener(final EditText edit, final int playerId) {
+        edit.setSelectAllOnFocus(true);
+
+        edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    ((EditText) v).selectAll();
+                }
+            }
+        });
+
+        edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String conflict = s.toString();
+                if (conflict.equals("")) {
+                    conflict = "0";
+                }
+                mPlayers.get(playerId).setConflict(Integer.parseInt(conflict));
+                calcConflict();
             }
         });
     }
